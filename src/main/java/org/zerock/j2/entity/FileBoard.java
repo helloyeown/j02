@@ -41,7 +41,7 @@ public class FileBoard {
 	@BatchSize(size = 20)
 	@OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY, orphanRemoval = true)
 	// 파일 보드가 여러 개의 이미지를 가질 것
-	@JoinColumn(name = "board")
+	@JoinColumn(name = "board")		// board라는 컬럼 만듬
 	@Builder.Default
 	private List<FileBoardImage> images = new ArrayList<>();
 	// 처음부터 new로 만들어서 해당 객체를 계속 가리키도록 초기화해서 관리함
