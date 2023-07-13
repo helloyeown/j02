@@ -18,17 +18,16 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import net.bytebuddy.agent.builder.AgentBuilder.PoolStrategy.Eager;
 
-@Entity
-@Getter
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
-@ToString(exclude = "images")	// 주의
-public class FileBoard {
-	
-	@Id
+	@Entity
+	@Getter
+	@Builder
+	@AllArgsConstructor
+	@NoArgsConstructor
+	@ToString(exclude = "images")	// 주의
+	public class FileBoard {
+
+		@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long bno;
 

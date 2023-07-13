@@ -31,6 +31,7 @@ public class Product {
 	private String pdesc;
 	private String writer;
 	private int price;
+	private boolean delFlag;
 	
 	// pk가 없는 특징
 	@ElementCollection(fetch = FetchType.LAZY)
@@ -51,4 +52,15 @@ public class Product {
 		this.price = price;
 	}
 
+	public void changePname(String pname){
+		this.pname = pname;
+	}
+
+	public void changePdesc(String pdesc){
+		this.pdesc = pdesc;
+	}
+
+	public void changeDel(boolean delFlag){
+		this.delFlag = delFlag;
+	}
 }

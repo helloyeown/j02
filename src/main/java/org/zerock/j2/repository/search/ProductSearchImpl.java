@@ -36,6 +36,7 @@ public class ProductSearchImpl extends QuerydslRepositorySupport implements Prod
 		query.leftJoin(product.images, productImage);	// product의 이미지를 productImage로 씀
 		// 참조가 없는 관계에서도 조인을 걸 수 있게 함
 		query.where(productImage.ord.eq(0));
+		query.where(product.delFlag.eq(Boolean.FALSE));
 
 		int pageNum = pageRequestDTO.getPage() <= 0 ? 0 : pageRequestDTO.getPage()-1;
 		Pageable pageable = PageRequest.of(pageNum, pageRequestDTO.getSize(), Sort.by("pno").descending());

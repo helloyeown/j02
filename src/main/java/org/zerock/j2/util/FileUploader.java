@@ -30,6 +30,28 @@ public class FileUploader {
 	@Value("${org.zerock.upload.path}")
 	private String path;
 
+	// 파일 삭제 (디비에선 삭제하지 않고 업데이트만)
+	public void removeFiles(List<String> fileNames){
+
+		if(fileNames == null || fileNames.size() == 0){
+			return;
+		}
+
+		// 예외 처리 때문에 람다식 사용x
+		for (String fname : fileNames) {
+			// 원본, 썸네일
+			File original = new File(path, fname);
+			File thumb = new File(path, "s_" + fname);
+
+			if(thumb.exists()){
+				thumb.delete();
+			}
+
+			original.delete();
+		}
+	}
+
+	// 파일 업로드
 	public List<String> uploadFiles(List<MultipartFile> files, boolean makeThumnail){
 
 		if(files == null || files.size() == 0){
