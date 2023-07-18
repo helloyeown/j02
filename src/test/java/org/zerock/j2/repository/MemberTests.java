@@ -19,7 +19,7 @@ public class MemberTests {
     public void testInsert(){
 
         Member member = Member.builder()
-                .email("user00@gmail.com")
+                .email("toquasimodo@naver.com")
                 .pw("1111")
                 .nickname("USER00")
                 .build();
