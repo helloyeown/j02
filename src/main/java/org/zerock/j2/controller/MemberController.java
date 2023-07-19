@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import org.zerock.j2.dto.MemberDTO;
 import org.zerock.j2.service.MemberService;
 import org.zerock.j2.service.SocialService;
+import org.zerock.j2.util.JwtUtil;
 
 import java.util.Map;
 
@@ -18,6 +19,7 @@ public class MemberController {
 
     private final MemberService memberService;
     private final SocialService socialService;
+    private final JwtUtil jwtUtil;
 
     // 카카오 로그인
     @GetMapping("kakao")
@@ -33,7 +35,7 @@ public class MemberController {
         return memberDTO;
     }
 
-    // 로그인
+    // 일반 로그인
     @PostMapping("login")
     public MemberDTO login(@RequestBody MemberDTO memberDTO){
         // 제이슨으로 응답
@@ -46,6 +48,10 @@ public class MemberController {
         }
 
         MemberDTO result = memberService.login(memberDTO.getEmail(), memberDTO.getPw());
+
+        result.setAccessToken(jwtUtil.generate(Map.of("email", result.getEmail()), 10));
+
+        result.setRefreshToken(jwtUtil.generate(Map.of("email", result.getEmail()), 60*24));
 
         log.info("Return: " + result);
 
